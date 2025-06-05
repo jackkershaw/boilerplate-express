@@ -55,6 +55,10 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: word });
 });
 
+// mount body parser
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // get query parameter
 app
   .route("/name")
@@ -63,4 +67,9 @@ app
     const lastName = req.query.last;
     res.json({ name: firstName + " " + lastName });
   })
-  .post();
+  // post it
+  .post((req, res) => {
+    const firstName = req.body.first;
+    const lastName = req.body.last;
+    res.json({ name: firstName + " " + lastName });
+  });
