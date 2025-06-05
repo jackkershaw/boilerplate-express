@@ -2,6 +2,7 @@ let express = require("express");
 let app = express();
 module.exports = app;
 require("dotenv").config();
+let bodyParser = require("body-parser");
 
 // middleware function - logging service
 
@@ -54,4 +55,12 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: word });
 });
 
-//
+// get query parameter
+app
+  .route("/name")
+  .get((req, res) => {
+    const firstName = req.query.first;
+    const lastName = req.query.last;
+    res.json({ name: firstName + " " + lastName });
+  })
+  .post();
